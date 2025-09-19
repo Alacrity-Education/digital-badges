@@ -1,10 +1,10 @@
-import Homepage from "./components/Homepage";
+import Onboarding from "./components/Onboarding";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <div>
-      <div><Homepage/></div>
+      <div><Onboarding/></div>
     </div>
   );
 }
