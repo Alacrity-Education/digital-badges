@@ -10,8 +10,8 @@ export const badges = pgTable("badges", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-export type Badge = InferSelectModel<typeof badges>;    // a row (when reading)
-export type NewBadge = InferInsertModel<typeof badges>; // a new row (when inserting)
+// export type Badge = InferSelectModel<typeof badges>;    // a row (when reading)
+// export type NewBadge = InferInsertModel<typeof badges>; // a new row (when inserting)
 
 // --- NEW TABLES START HERE ---
 
@@ -22,8 +22,8 @@ export const issuers = pgTable("issuers", {
   url: text("url").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
-export type Issuer = InferSelectModel<typeof issuers>;
-export type NewIssuer = InferInsertModel<typeof issuers>;
+// export type Issuer = InferSelectModel<typeof issuers>;
+// export type NewIssuer = InferInsertModel<typeof issuers>;
 
 // BADGE CLASS
 export const badgeClasses = pgTable("badge_classes", {
@@ -36,8 +36,8 @@ export const badgeClasses = pgTable("badge_classes", {
   issuerId: integer("issuer_id").references(() => issuers.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
-export type BadgeClass = InferSelectModel<typeof badgeClasses>;
-export type NewBadgeClass = InferInsertModel<typeof badgeClasses>;
+// export type BadgeClass = InferSelectModel<typeof badgeClasses>;
+// export type NewBadgeClass = InferInsertModel<typeof badgeClasses>;
 
 // RECIPIENT
 export const recipients = pgTable("recipients", {
@@ -47,8 +47,8 @@ export const recipients = pgTable("recipients", {
   hashed: text("hashed").default("false"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
-export type Recipient = InferSelectModel<typeof recipients>;
-export type NewRecipient = InferInsertModel<typeof recipients>;
+// export type Recipient = InferSelectModel<typeof recipients>;
+// export type NewRecipient = InferInsertModel<typeof recipients>;
 
 // BADGE ASSERTION
 export const badgeAssertions = pgTable("badge_assertions", {
@@ -59,5 +59,5 @@ export const badgeAssertions = pgTable("badge_assertions", {
   issuedOn: timestamp("issued_on").defaultNow().notNull(),
   image: text("image"),
 });
-export type BadgeAssertion = InferSelectModel<typeof badgeAssertions>;
-export type NewBadgeAssertion = InferInsertModel<typeof badgeAssertions>;
+// export type BadgeAssertion = InferSelectModel<typeof badgeAssertions>;
+// export type NewBadgeAssertion = InferInsertModel<typeof badgeAssertions>;
