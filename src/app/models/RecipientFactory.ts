@@ -9,6 +9,7 @@ export class RecipientFactory implements IRecipientFactory {
         const defaultRecipient: IRecipient = {
             id: 0,
             email: "",
+            name: "",
             hashedEmail: "",
             createdAt: new Date(),
         };

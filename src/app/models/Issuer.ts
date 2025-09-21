@@ -15,3 +15,4 @@ export class Issuer implements IIssuer  {
         this.createdAt = data.createdAt;
     }
 }
+

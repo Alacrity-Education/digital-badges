@@ -27,6 +27,7 @@ export interface IBadgeAssertion {
 
 export interface IRecipient {
   id: number;
+  name:string;
   email: string;
   hashedEmail: string;
   createdAt: Date;

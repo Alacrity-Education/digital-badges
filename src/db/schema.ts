@@ -40,7 +40,7 @@ export const badgeClasses = pgTable("badge_classes", {
 // export type NewBadgeClass = InferInsertModel<typeof badgeClasses>;
 
 // RECIPIENT
-export const recipients = pgTable("recipients", {
+export const awardees = pgTable("awardees", {
   id: serial("id").primaryKey(),
   identity: text("identity").notNull(),
   type: text("type").default("email").notNull(),
@@ -55,7 +55,7 @@ export const badgeAssertions = pgTable("badge_assertions", {
   id: serial("id").primaryKey(),
   uuid: uuid("uuid").defaultRandom().notNull(),
   badgeId: serial("badge_id").references(() => badgeClasses.id, { onDelete: "cascade" }),
-  recipientId: serial("recipient_id").references(() => recipients.id, { onDelete: "cascade" }),
+  awardeeId: serial("awardee_id").references(() => awardees.id, { onDelete: "cascade" }),
   issuedOn: timestamp("issued_on").defaultNow().notNull(),
   image: text("image"),
 });

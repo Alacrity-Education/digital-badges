@@ -1,11 +1,21 @@
-import AwardeesPage from "./components/Awardees";
-import Badge from "./components/Badge";
-import Image from "next/image";
+import { redirect } from "next/navigation";
+import { hasIssuer } from "./onboarding/page";
+import AwardeesView from "./components/AwardeesView";
 
-export default function Home() {
-  return (
-    <div>
-      <div><AwardeesPage /></div>
-    </div>
-  );
+export default async function Home() {
+
+
+
+
+  if (! await hasIssuer()) {
+    redirect("/onboarding");
+  }
+
+  redirect("/awardees");
+
+
+
+
 }
+
+

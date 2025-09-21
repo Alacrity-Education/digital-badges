@@ -35,6 +35,6 @@ export default async function Onboarding() {
     )
 }
 
-async function hasIssuer() {
+export async function hasIssuer() {
     return (await db.select().from(issuers).limit(1) as Issuer[]).length > 0;
 }
