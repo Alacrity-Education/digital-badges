@@ -43,23 +43,23 @@ class BadgeAssertionBuilder implements IBadgeAssertionBuilder {
     }
   }
 
-  async build(): Promise<IBadgeAssertion> {
+  build(): IBadgeAssertion {
 
     this.validateRequiredFields();
 
-    const badgeAssertion = (await db.insert(badgeAssertions).values({
-      uuid: uuidv4(),
-      badgeId: this.badgeId,
-      recipientId: this.recipientId,
-      issuedOn: this.issuedOn,
-      image: this.image,
-    }).returning() as IBadgeAssertion[])[0];
+    // const badgeAssertion = (await db.insert(badgeAssertions).values({
+    //   uuid: uuidv4(),
+    //   badgeId: this.badgeId,
+    //   recipientId: this.recipientId,
+    //   issuedOn: this.issuedOn,
+    //   image: this.image,
+    // }).returning() as IBadgeAssertion[])[0];
 
-    if (!badgeAssertion) {
-      throw new Error('Failed to create badge assertion');
-    }
+    // if (!badgeAssertion) {
+    //   throw new Error('Failed to create badge assertion');
+    // }
 
-    return badgeAssertion;
+    return new;
   }
 }
 

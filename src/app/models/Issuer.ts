@@ -14,6 +14,4 @@ export class Issuer implements IIssuer  {
         this.url = data.url;
         this.createdAt = data.createdAt;
     }
-
-
 }

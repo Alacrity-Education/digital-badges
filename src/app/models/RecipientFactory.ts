@@ -13,12 +13,6 @@ export class RecipientFactory implements IRecipientFactory {
             createdAt: new Date(),
         };
 
-        const recipient = ((await db.insert(recipients).values({ ...defaultRecipient, ...overrides }).returning())as Recipient[])[0];
-        if(!recipient){
-            throw new Error("Failed to create recipient");
-        }
-        return recipient;
-        
-     
+        return new Recipient({ ...defaultRecipient, ...overrides });
     }
 }

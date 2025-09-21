@@ -6,7 +6,7 @@ export interface IIssuer  {
 }
 
 export interface IIssuerFactory {
-  makeIssuer: (overrides?: Partial<IIssuer>) => Promise<IIssuer>;
+  makeIssuer: (overrides?: Partial<IIssuer>) => IIssuer;
 }
 
 export interface IBadge {
@@ -41,7 +41,7 @@ export interface IBadgeAssertionBuilder {
   setRecipientId(recipientId: number): IBadgeAssertionBuilder;
   setIssuedOn(issuedOn: Date): IBadgeAssertionBuilder;
   setImage(image: string | null): IBadgeAssertionBuilder;
-  build(): Promise<IBadgeAssertion>;
+  build(): IBadgeAssertion;
 }
 
 export interface IBadgeAssertionBuilderFactory {

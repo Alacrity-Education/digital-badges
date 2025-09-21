@@ -3,6 +3,9 @@
 import { db } from "@/db/clients";
 import { issuers } from "@/db/schema";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { IIssuer, IIssuerFactory } from "../types";
+import { IssuerFactory } from "../models/IssuerFactory";
 
 /**
  * Creates a new issuer record in the database using the provided form data.
@@ -20,10 +23,9 @@ export async function createIssuer(formData: FormData): Promise<void> {
 
   if (!name || !url) return;
 
-  await db.insert(issuers).values({
-    name,
-    url,
-  });
+  const issuer : IIssuer = await IssuerFactory.makeIssuer({ name, url });
 
-  revalidatePath("/issuers");
+  const returnedIssuer = await db.insert(issuers).values(issuer).returning();
+  console.log("Created issuer:", returnedIssuer);
+  redirect("/");
 }
