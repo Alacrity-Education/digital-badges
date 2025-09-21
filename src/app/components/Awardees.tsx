@@ -111,7 +111,7 @@ const AwardeesPage = () => {
                 </button>
                 <button
                   onClick={() => handleDeleteAwardee(awardee.id)}
-                  className="bg-red-600 text-white p-2 rounded-lg"
+                  className="text-white p-2 rounded-lg bg-accent"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 48 48" fill="#FFFFFF">
                     <path d="M34,44H14c-2.2,0-4-1.8-4-4V10c0-2.2,1.8-4,4-4h4.4c0.8-1.5,2.4-2.5,4.3-2.5h1.9c1.9,0,3.5,1.1,4.3,2.5H34c2.2,0,4,1.8,4,4v30C38,42.2,36.2,44,34,44z M12,10c0-1.1,0.9-2,2-2h3.9c-0.1,0.5-0.2,1-0.2,1.5c0,1.9,1.6,3.5,3.5,3.5h1.9c1.9,0,3.5-1.6,3.5-3.5c0-0.5-0.1-1-0.2-1H34c1.1,0,2,0.9,2,2v30c0,1.1-0.9,2-2,2H14c-1.1,0-2-0.9-2-2V10z M22,17c-0.6,0-1,0.4-1,1v16c0,0.6,0.4,1,1,1s1-0.4,1-1V18C23,17.4,22.6,17,22,17z M18,17c-0.6,0-1,0.4-1,1v16c0,0.6,0.4,1,1,1s1-0.4,1-1V18C19,17.4,18.6,17,18,17z M26,17c-0.6,0-1,0.4-1,1v16c0,0.6,0.4,1,1,1s1-0.4,1-1V18C27,17.4,26.6,17,26,17z M30,17c-0.6,0-1,0.4-1,1v16c0,0.6,0.4,1,1,1s1-0.4,1-1V18C31,17.4,30.6,17,30,17z"/>
@@ -135,7 +135,7 @@ const AwardeesPage = () => {
 
       {/* Main Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-end justify-center z-50">
           <div className="bg-white rounded-t-3xl p-6 w-full transform transition-transform duration-300 ease-in-out">
             <h2 className="text-xl font-bold text-center mb-6 text-black">{selectedAwardeeName}</h2>
 
@@ -144,10 +144,10 @@ const AwardeesPage = () => {
               <div className="flex items-center justify-between border-b pb-4">
                 <span className="font-medium text-black">Badge 1</span>
                 <div className="space-x-2">
-                  <button onClick={() => openPopup('grant')} className="bg-green-700 text-white px-4 py-2 rounded-lg">
+                  <button onClick={() => openPopup('grant')} className="bg-accent-content text-white px-4 py-2 rounded-lg">
                     GRANT
                   </button>
-                  <button onClick={() => openPopup('revoke')} className="bg-red-700 text-white px-4 py-2 rounded-lg">
+                  <button onClick={() => openPopup('revoke')} className="bg-accent text-white px-4 py-2 rounded-lg">
                     REVOKE
                   </button>
                 </div>
@@ -155,10 +155,10 @@ const AwardeesPage = () => {
               <div className="flex items-center justify-between border-b pb-4">
                 <span className="font-medium text-black">Badge 2</span>
                 <div className="space-x-2">
-                  <button onClick={() => openPopup('grant')} className="bg-green-700 text-white px-4 py-2 rounded-lg">
+                  <button onClick={() => openPopup('grant')} className="bg-accent-content text-white px-4 py-2 rounded-lg">
                     GRANT
                   </button>
-                  <button onClick={() => openPopup('revoke')} className="bg-red-700 text-white px-4 py-2 rounded-lg">
+                  <button onClick={() => openPopup('revoke')} className="bg-accent text-white px-4 py-2 rounded-lg">
                     REVOKE
                   </button>
                 </div>
@@ -166,10 +166,10 @@ const AwardeesPage = () => {
               <div className="flex items-center justify-between">
                 <span className="font-medium text-black">Badge 3</span>
                 <div className="space-x-2">
-                  <button onClick={() => openPopup('grant')} className="bg-green-700 text-white px-4 py-2 rounded-lg">
+                  <button onClick={() => openPopup('grant')} className="bg-accent-content text-white px-4 py-2 rounded-lg">
                     GRANT
                   </button>
-                  <button onClick={() => openPopup('revoke')} className="bg-red-700 text-white px-4 py-2 rounded-lg">
+                  <button onClick={() => openPopup('revoke')} className="bg-accent text-white px-4 py-2 rounded-lg">
                     REVOKE
                   </button>
                 </div>
@@ -178,7 +178,7 @@ const AwardeesPage = () => {
 
             {/* Modal Action Buttons */}
             <div className="flex space-x-4 mt-6">
-              <button className="flex-1 bg-red-800 text-white font-bold py-3 rounded-lg">
+              <button className="flex-1 bg-accent text-white font-bold py-3 rounded-lg">
                 REVOKE ALL
               </button>
               <button
@@ -194,7 +194,7 @@ const AwardeesPage = () => {
 
       {/* Confirmation Pop-up */}
       {isPopupOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50  flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center mx-4">
             <h3 className="text-xl font-bold mb-4">Confirm Action</h3>
             <p className="mb-6">
@@ -210,7 +210,7 @@ const AwardeesPage = () => {
               </button>
               <button
                 onClick={confirmAction}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+                className="px-4 py-2 bg-info text-white rounded-lg"
               >
                 Confirm
               </button>
