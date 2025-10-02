@@ -2,11 +2,10 @@
 
 import { db } from "@/db/clients";
 import { Issuers } from "@/db/schema";
-import { revalidatePath } from "next/cache";
+
 import { redirect } from "next/navigation";
 import { Issuer } from "@/db/schema";
 import { IssuerFactory } from "../models/IssuerFactory";
-import { eq } from "drizzle-orm";
 
 /**
  * Creates a new issuer record in the database using the provided form data.

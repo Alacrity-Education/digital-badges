@@ -1,6 +1,6 @@
 import { AwardeeEntry, AwardeeSearch } from "./components/ui";
 import { db } from "@/db/clients";
-import { BadgeAssertions, Recipient, Recipients } from "@/db/schema";
+import { BadgeAssertions, Recipients } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { BadgeClasses } from "@/db/schema";
 import { Award } from "../types";

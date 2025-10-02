@@ -1,12 +1,9 @@
-import { db } from "@/db/clients";
 import {
   BadgeAssertionBuilder as IBadgeAssertionBuilder,
   BadgeAssertionBuilderFactory as IBadgeAssertionBuilderFactory,
 } from "../types";
 import { v4 as uuidv4 } from "uuid";
-import { BadgeAssertion, NewBadgeAssertion } from "@/db/schema";
-
-let nextId = 1;
+import { NewBadgeAssertion } from "@/db/schema";
 
 class BadgeAssertionBuilder implements IBadgeAssertionBuilder {
   private badgeId!: number;
@@ -47,7 +44,7 @@ class BadgeAssertionBuilder implements IBadgeAssertionBuilder {
     this.validateRequiredFields();
 
     const badgeAssertion: NewBadgeAssertion = {
-      uuid: uuidv4(),
+      uid: uuidv4(),
       badgeId: this.badgeId,
       recipientId: this.recipientId,
       issuedOn: new Date().toDateString(),

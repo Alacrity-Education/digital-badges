@@ -4,9 +4,7 @@ import * as schema from "./schema";
 
 // Define a global type so TypeScript doesn’t complain
 declare global {
-  // eslint-disable-next-line no-var
   var _db: ReturnType<typeof drizzle> | undefined;
-  // eslint-disable-next-line no-var
   var _pool: Pool | undefined;
 }
 

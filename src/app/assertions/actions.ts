@@ -4,11 +4,7 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/db/clients";
 import { BadgeAssertion, BadgeAssertions } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import {
-  checkRecipientExists,
-  createRecipient,
-  getRecipientById,
-} from "../recipients/actions";
+import { createRecipient, getRecipientById } from "../recipients/actions";
 import { BadgeAssertionBuilderFactory } from "../models/BadgeAssertionBuilderFactory";
 import { getIssuer } from "../onboarding/actions";
 import { getBadgeById } from "../badges/actions";

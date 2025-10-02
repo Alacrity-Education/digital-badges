@@ -2,7 +2,6 @@ import { Modal } from "@/app/components/Modal";
 import { Badge } from "@/db/schema";
 import React from "react";
 import {
-  createAssertion,
   deleteAssertionByAssertionId,
   deleteAssertionByUserId,
   grantBadge,

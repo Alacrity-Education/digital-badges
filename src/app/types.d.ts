@@ -23,7 +23,7 @@ export interface BadgeAssertionBuilder {
 }
 
 export interface BadgeAssertionBuilderFactory {
-  static createBuilder(): BadgeAssertionBuilder;
+  createBuilder(): BadgeAssertionBuilder;
 }
 
 export interface AwardeeFactory {

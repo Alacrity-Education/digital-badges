@@ -11,7 +11,7 @@ export default async function AssertionPage({
   searchParams,
 }: {
   params: { uid: string };
-  searchParams: any;
+  searchParams: { format?: string };
 }) {
   const { uid } = await params;
   const h = await headers();

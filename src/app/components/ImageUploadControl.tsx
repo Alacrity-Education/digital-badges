@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function ImageUploadControl({
@@ -35,16 +36,19 @@ export default function ImageUploadControl({
         htmlFor="badge-image-control"
         className="h-32 w-32 rounded-full hover:shadow-2xl transition-all shadow-md border-2 border-base-content/50"
       >
-        <img
+        <Image
+          alt="badge-image"
+          height={500}
+          width={500}
           src={
             image
               ? URL.createObjectURL(image)
               : url
-              ? url
-              : "https://placehold.co/500x500/png"
+                ? url
+                : "https://placehold.co/500x500/png"
           }
           className="h-full w-full object-cover rounded-full"
-        ></img>
+        />
       </label>
 
       <input

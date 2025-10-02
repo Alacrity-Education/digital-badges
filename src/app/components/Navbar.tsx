@@ -1,7 +1,6 @@
 import React from "react";
 import { getIssuer } from "../onboarding/page";
 import Link from "next/link";
-import { Issuer } from "@/db/schema";
 
 export default async function Navbar() {
   //fetch issuer to show name in navbar

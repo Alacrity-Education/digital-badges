@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useState } from "react";
+import React from "react";
 import { Badge } from "@/db/schema";
 import { Modal } from "../../components/Modal";
 import Link from "next/link";

@@ -1,4 +1,3 @@
-import { getAssertionByUUID } from "@/app/assertions/actions";
 import { getBadgeByUUID } from "@/app/badges/actions";
 import { getIssuer } from "@/app/onboarding/actions";
 import type { NextRequest } from "next/server";

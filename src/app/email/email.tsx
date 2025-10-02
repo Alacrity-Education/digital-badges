@@ -19,7 +19,7 @@ export const sendEmailToAwardee = async (props: EmailTemplateProps) => {
   const url = new URL(props.issuer.url);
   const domain = url.hostname;
   const { data, error } = await resend.emails.send({
-    from: `Badge Engine <badges@alacrity.education>`,
+    from: `Badge Engine <badges@${domain}>`,
     to: [props.recipient.identity],
     subject: "Badge Devlivery!",
     react: EmailTemplate(props),
@@ -42,7 +42,7 @@ export function EmailTemplate({
     <div>
       <h1>Hi, {recipient.name}!</h1>
       <p>
-        Congratulations! You have been awarded the "{badge.name}" badge by{" "}
+        Congratulations! You have been awarded the {badge.name} badge by{" "}
         <a href={issuer.url}>{issuer.name}</a>
       </p>
       <p>
