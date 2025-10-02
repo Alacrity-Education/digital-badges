@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "drizzle-kit generate && drizzle-kit migrate && drizzle-kit push && next build --turbopack",
     "start": "next start",
     "lint": "eslint"
   },
@@ -21,7 +21,8 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "resend": "^6.1.0",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "drizzle-kit": "^0.31.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
