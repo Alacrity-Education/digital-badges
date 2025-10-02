@@ -1,4 +1,11 @@
 export { auth as middleware } from "@/app/auth";
 export const config = {
-  matcher: ["/badges/:path*", "/onboarding/:path*", "/recipients/:path*"],
+  matcher: [
+    "/badges/:path*",
+    "/onboarding/:path*",
+    "/recipients/:path*",
+    "/badges",
+    "/onboarding",
+    "/recipients",
+  ],
 };
