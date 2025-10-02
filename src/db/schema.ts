@@ -1,63 +1,66 @@
-import { pgTable, serial, text, timestamp, uuid, integer } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  uuid,
+  integer,
+  date,
+} from "drizzle-orm/pg-core";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
-
-// our badges table
-export const badges = pgTable("badges", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  description: text("description"),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
-
-// export type Badge = InferSelectModel<typeof badges>;    // a row (when reading)
-// export type NewBadge = InferInsertModel<typeof badges>; // a new row (when inserting)
-
-// --- NEW TABLES START HERE ---
-
 // ISSUER
-export const issuers = pgTable("issuers", {
+export const Issuers = pgTable("issuers", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   url: text("url").notNull(),
+  engineUrl: text("engine_url"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
-// export type Issuer = InferSelectModel<typeof issuers>;
-// export type NewIssuer = InferInsertModel<typeof issuers>;
+export type Issuer = InferSelectModel<typeof Issuers>;
 
 // BADGE CLASS
-export const badgeClasses = pgTable("badge_classes", {
+export const BadgeClasses = pgTable("badge_classes", {
   id: serial("id").primaryKey(),
-  uuid: uuid("uuid").defaultRandom().notNull(),
+  uid: uuid("uid").defaultRandom().notNull(),
   name: text("name").notNull(),
   description: text("description"),
-  image: text("image"),
+  imageUrl: text("imageUrl"),
   criteria: text("criteria"),
-  issuerId: integer("issuer_id").references(() => issuers.id, { onDelete: "cascade" }),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
+  issuerId: integer("issuer_id").references(() => Issuers.id, {
+    onDelete: "cascade",
+  }),
+  createdAt: date("created_at").defaultNow().notNull(),
 });
-// export type BadgeClass = InferSelectModel<typeof badgeClasses>;
-// export type NewBadgeClass = InferInsertModel<typeof badgeClasses>;
+export type Badge = InferSelectModel<typeof BadgeClasses>;
 
 // RECIPIENT
-export const awardees = pgTable("awardees", {
+export const Recipients = pgTable("recipients", {
   id: serial("id").primaryKey(),
   identity: text("identity").notNull(),
+  name: text("name").notNull(),
   type: text("type").default("email").notNull(),
   hashed: text("hashed").default("false"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
-// export type Recipient = InferSelectModel<typeof recipients>;
-// export type NewRecipient = InferInsertModel<typeof recipients>;
+export type Recipient = InferSelectModel<typeof Recipients>;
 
 // BADGE ASSERTION
-export const badgeAssertions = pgTable("badge_assertions", {
+export const BadgeAssertions = pgTable("badge_assertions", {
   id: serial("id").primaryKey(),
-  uuid: uuid("uuid").defaultRandom().notNull(),
-  badgeId: serial("badge_id").references(() => badgeClasses.id, { onDelete: "cascade" }),
-  awardeeId: serial("awardee_id").references(() => awardees.id, { onDelete: "cascade" }),
-  issuedOn: timestamp("issued_on").defaultNow().notNull(),
+  uid: uuid("uid").defaultRandom().notNull(),
+  badgeId: serial("badge_id").references(() => BadgeClasses.id, {
+    onDelete: "cascade",
+  }),
+  recipientId: serial("recipient_id").references(() => Recipients.id, {
+    onDelete: "cascade",
+  }),
+  issuedOn: date("issued_on").defaultNow().notNull(),
   image: text("image"),
 });
-// export type BadgeAssertion = InferSelectModel<typeof badgeAssertions>;
-// export type NewBadgeAssertion = InferInsertModel<typeof badgeAssertions>;
+export type BadgeAssertion = InferSelectModel<typeof BadgeAssertions>;
+
+export type NewIssuer = InferInsertModel<typeof Issuers>;
+export type NewBadge = InferInsertModel<typeof BadgeClasses>;
+export type NewRecipient = InferInsertModel<typeof Recipients>;
+export type NewBadgeAssertion = InferInsertModel<typeof BadgeAssertions>;

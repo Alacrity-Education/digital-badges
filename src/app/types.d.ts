@@ -1,54 +1,38 @@
-export interface IIssuer  {
-  id: number;
-  name: string;
-  url: string;
-  createdAt: Date;
+//primitives
+// declare module "@/db/client";
+// declare module "@/db/schema";
+
+import { Issuer, NewBadgeAssertion } from "@/db/schema";
+import { Awardee } from "@/db/schema";
+import { Badge } from "@/db/schema";
+import { BadgeAssertion } from "@/db/schema";
+export interface IssuerFactory {
+  makeIssuer: (overrides?: Partial<Issuer>) => Issuer;
 }
 
-export interface IIssuerFactory {
-  makeIssuer: (overrides?: Partial<IIssuer>) => IIssuer;
+export interface BadgeFactory {
+  makeBadge: (overrides?: Partial<Badge>) => Promise<Badge>;
 }
 
-export interface IBadge {
-  id: number;
-  name: string;
-  description: string | null;
-  createdAt: Date;
-};
-
-export interface IBadgeAssertion {
-  id: number;
-  uuid: string;
-  badgeId: number;
-  recipientId: number;
-  issuedOn: Date;
-  image: string | null;
-};
-
-export interface IRecipient {
-  id: number;
-  name:string;
-  email: string;
-  hashedEmail: string;
-  createdAt: Date;
+export interface BadgeAssertionBuilder {
+  setBadgeId(badgeId: number): BadgeAssertionBuilder;
+  setRecipientId(recipientId: number): BadgeAssertionBuilder;
+  setIssuedOn(issuedOn: Date): BadgeAssertionBuilder;
+  setImage(image: string | null): BadgeAssertionBuilder;
+  build(): NewBadgeAssertion;
 }
 
-export interface IBadgeFactory {
-  makeBadge: (overrides?: Partial<IBadge>) => Promise<IBadge>;
+export interface BadgeAssertionBuilderFactory {
+  static createBuilder(): BadgeAssertionBuilder;
 }
 
-export interface IBadgeAssertionBuilder {
-  setBadgeId(badgeId: number): IBadgeAssertionBuilder;
-  setRecipientId(recipientId: number): IBadgeAssertionBuilder;
-  setIssuedOn(issuedOn: Date): IBadgeAssertionBuilder;
-  setImage(image: string | null): IBadgeAssertionBuilder;
-  build(): IBadgeAssertion;
+export interface AwardeeFactory {
+  makeRecipient: (overrides?: Partial<Awardee>) => Promise<Recipient>;
 }
 
-export interface IBadgeAssertionBuilderFactory {
-  createBuilder(): IBadgeAssertionBuilder;
-}
+// domain
 
-export interface IRecipientFactory {
-  makeRecipient: (overrides?: Partial<IRecipient>) => Promise<IRecipient>;
+export interface Award {
+  assertion: BadgeAssertion;
+  badge: Badge;
 }

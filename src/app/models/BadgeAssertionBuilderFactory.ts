@@ -1,14 +1,17 @@
-import { db } from '@/db/clients';
-import { IBadgeAssertion, IBadgeAssertionBuilder, IBadgeAssertionBuilderFactory } from '../types';
-import { v4 as uuidv4 } from 'uuid';
-import { badgeAssertions } from '@/db/schema';
+import { db } from "@/db/clients";
+import {
+  BadgeAssertionBuilder as IBadgeAssertionBuilder,
+  BadgeAssertionBuilderFactory as IBadgeAssertionBuilderFactory,
+} from "../types";
+import { v4 as uuidv4 } from "uuid";
+import { BadgeAssertion, NewBadgeAssertion } from "@/db/schema";
 
 let nextId = 1;
 
 class BadgeAssertionBuilder implements IBadgeAssertionBuilder {
   private badgeId!: number;
   private recipientId!: number;
-  private issuedOn!: Date;
+  private issuedOn!: Date | null;
   private image: string | null = null;
 
   setBadgeId(badgeId: number): IBadgeAssertionBuilder {
@@ -33,37 +36,31 @@ class BadgeAssertionBuilder implements IBadgeAssertionBuilder {
 
   private validateRequiredFields(): void {
     if (this.badgeId === undefined) {
-    throw new Error('badgeId must be defined');
+      throw new Error("badgeId must be defined");
     }
     if (this.recipientId === undefined) {
-    throw new Error('recipientId must be defined');
-    }
-    if (this.issuedOn === undefined) {
-    throw new Error('issuedOn must be defined');
+      throw new Error("recipientId must be defined");
     }
   }
 
-  build(): IBadgeAssertion {
-
+  build(): NewBadgeAssertion {
     this.validateRequiredFields();
 
-    // const badgeAssertion = (await db.insert(badgeAssertions).values({
-    //   uuid: uuidv4(),
-    //   badgeId: this.badgeId,
-    //   recipientId: this.recipientId,
-    //   issuedOn: this.issuedOn,
-    //   image: this.image,
-    // }).returning() as IBadgeAssertion[])[0];
+    const badgeAssertion: NewBadgeAssertion = {
+      uuid: uuidv4(),
+      badgeId: this.badgeId,
+      recipientId: this.recipientId,
+      issuedOn: new Date().toDateString(),
+      image: this.image,
+    };
 
-    // if (!badgeAssertion) {
-    //   throw new Error('Failed to create badge assertion');
-    // }
-
-    return new;
+    return badgeAssertion;
   }
 }
 
-export class BadgeAssertionBuilderFactory implements IBadgeAssertionBuilderFactory {
+export class BadgeAssertionBuilderFactory
+  implements IBadgeAssertionBuilderFactory
+{
   createBuilder(): IBadgeAssertionBuilder {
     return new BadgeAssertionBuilder();
   }

@@ -11,7 +11,8 @@ declare global {
 }
 
 // Reuse connections during hot reload in dev
-const pool = global._pool || new Pool({ connectionString: process.env.DATABASE_URL });
+const pool =
+  global._pool || new Pool({ connectionString: process.env.DATABASE_URL });
 const db = global._db || drizzle(pool, { schema });
 
 if (process.env.NODE_ENV !== "production") {

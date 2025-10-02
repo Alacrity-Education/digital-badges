@@ -1,17 +1,16 @@
 import { db } from "@/db/clients";
-import { IIssuer, IIssuerFactory } from '../types';
-import { issuers } from "@/db/schema";
-import { Issuer } from "./Issuer";
+import { IssuerFactory as IIssuerFactory } from "../types";
+import { Issuer } from "@/db/schema";
 
 export const IssuerFactory: IIssuerFactory = {
-    makeIssuer(overrides: Partial<IIssuer> = {}): IIssuer {
-        const defaultIssuer: IIssuer  = {
-            id: 0,
-            name: 'Default Issuer Name',
-            url: 'https://default-issuer-url.com',
-            createdAt: new Date(),
-        };
+  makeIssuer(overrides: Partial<Issuer> = {}): Issuer {
+    const defaultIssuer: Issuer = {
+      id: 0,
+      name: "Default Issuer Name",
+      url: "https://default-issuer-url.com",
+      createdAt: new Date(),
+    };
 
-        return new Issuer({ ...defaultIssuer, ...overrides });
-    },
+    return { ...defaultIssuer, ...overrides };
+  },
 };

@@ -1,20 +1,30 @@
 import React from "react";
+import { getIssuer } from "../onboarding/page";
+import Link from "next/link";
+import { Issuer } from "@/db/schema";
 
-export default function Navbar() {
+export default async function Navbar() {
+  //fetch issuer to show name in navbar
+  const issuer = await getIssuer();
+  if (!issuer) {
+    return null;
+  }
+
   return (
-    <div className="relative flex items-center border-b border-black px-4 md:px-8 py-2 md:py-4">
-      {/* Site name: absolutely positioned on desktop, normal on mobile */}
-      <span className="font-bold text-black text-lg md:text-xl flex-shrink-0 md:absolute md:left-8">
-        Alacrity Education
-      </span>
-      <nav className="flex w-full justify-center space-x-6 md:space-x-10">
-        <button className="text-black font-semibold hover:underline focus:outline-none">
-          Badges
-        </button>
-        <button className="text-black font-semibold hover:underline focus:outline-none">
-          Awardees
-        </button>
-      </nav>
+    <div className="navbar bg-base-100 shadow-sm">
+      <div className="flex-1">
+        <a className="btn btn-ghost text-xl">{issuer.name}</a>
+      </div>
+      <div className="flex-none">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <Link href="/badges">Badges</Link>
+          </li>
+          <li>
+            <Link href="/recipients">Recipients</Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

@@ -1,21 +1,12 @@
 import { redirect } from "next/navigation";
-import { hasIssuer } from "./onboarding/page";
-import AwardeesView from "./components/AwardeesView";
+import { getIssuer } from "./onboarding/page";
+import { db } from "@/db/clients";
+import { Issuers } from "@/db/schema";
 
 export default async function Home() {
-
-
-
-
-  if (! await hasIssuer()) {
+  if (!(await getIssuer())) {
     redirect("/onboarding");
   }
 
-  redirect("/awardees");
-
-
-
-
+  redirect("/recipients");
 }
-
-

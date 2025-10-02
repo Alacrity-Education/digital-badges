@@ -1,15 +1,16 @@
 "use server";
 
 import { db } from "@/db/clients";
-import { issuers } from "@/db/schema";
+import { Issuers } from "@/db/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { IIssuer, IIssuerFactory } from "../types";
+import { Issuer } from "@/db/schema";
 import { IssuerFactory } from "../models/IssuerFactory";
+import { eq } from "drizzle-orm";
 
 /**
  * Creates a new issuer record in the database using the provided form data.
- * 
+ *
  * Extracts the "name" and "url" fields from the given FormData, validates them,
  * and inserts a new issuer into the database. After insertion, it triggers a revalidation
  * of the "/issuers" path to ensure the UI reflects the latest data.
@@ -20,12 +21,19 @@ import { IssuerFactory } from "../models/IssuerFactory";
 export async function createIssuer(formData: FormData): Promise<void> {
   const name = String(formData.get("name") ?? "").trim();
   const url = String(formData.get("url") ?? "").trim();
+  const engineUrl = String(formData.get("engineUrl") ?? "").trim();
 
   if (!name || !url) return;
 
-  const issuer : IIssuer = await IssuerFactory.makeIssuer({ name, url });
+  const issuer = await IssuerFactory.makeIssuer({ name, url, engineUrl });
 
-  const returnedIssuer = await db.insert(issuers).values(issuer).returning();
+  const returnedIssuer = await db.insert(Issuers).values(issuer).returning();
   console.log("Created issuer:", returnedIssuer);
   redirect("/");
+}
+
+export async function getIssuer(): Promise<Issuer | null> {
+  const issuer = await db.select().from(Issuers).limit(1);
+  if (issuer.length === 0) return null;
+  return issuer[0];
 }

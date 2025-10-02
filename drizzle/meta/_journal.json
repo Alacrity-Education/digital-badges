@@ -22,6 +22,48 @@
       "when": 1758314449760,
       "tag": "0002_overjoyed_the_spike",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1758528130393,
+      "tag": "0003_funny_talisman",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1758533608653,
+      "tag": "0004_high_husk",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1758619460855,
+      "tag": "0005_fearless_doorman",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1758875045322,
+      "tag": "0006_perpetual_lake",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1759080510642,
+      "tag": "0007_dazzling_supreme_intelligence",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1759390471732,
+      "tag": "0008_fearless_iron_lad",
+      "breakpoints": true
     }
   ]
 }
