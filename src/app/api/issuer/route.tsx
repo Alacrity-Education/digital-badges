@@ -6,10 +6,9 @@ export async function GET() {
     return new Response("Issuer not found", { status: 404 });
   }
   const stringifiedIssuer = Object.fromEntries(
-    Object.entries(issuer).map(([key, value]) => [
-      key,
-      value != null ? String(value) : "",
-    ])
+    Object.entries(issuer)
+      .filter(([key]) => key !== "id")
+      .map(([key, value]) => [key, value != null ? String(value) : ""])
   );
   return Response.json(stringifiedIssuer);
 }

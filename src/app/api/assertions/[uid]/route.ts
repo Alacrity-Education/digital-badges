@@ -10,11 +10,13 @@ export async function GET(
   const assertion = await getAssertionByUUID(uid);
   //make all fields string. create new assertion
   const stringifiedAssertion = Object.fromEntries(
-    Object.entries(assertion).map(([key, value]) =>
-      key === "issuedOn"
-        ? [key, value]
-        : [key, value != null ? String(value) : ""]
-    )
+    Object.entries(assertion)
+      .filter(([key]) => key !== "id")
+      .map(([key, value]) =>
+        key === "issuedOn"
+          ? [key, value]
+          : [key, value != null ? String(value) : ""]
+      )
   );
 
   return Response.json(stringifiedAssertion);
