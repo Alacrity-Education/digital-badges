@@ -1,9 +1,11 @@
 import React from "react";
 import { getIssuer } from "../onboarding/page";
 import Link from "next/link";
+import { auth } from "../auth";
 
 export default async function Navbar() {
-  //fetch issuer to show name in navbar
+  const session = await auth();
+  if (!session) return; //fetch issuer to show name in navbar
   const issuer = await getIssuer();
   if (!issuer) {
     return null;
