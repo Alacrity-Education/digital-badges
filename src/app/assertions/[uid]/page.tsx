@@ -33,7 +33,14 @@ export default async function AssertionPage({
   }
 
   const assertion = await getAssertionByUUID(uid);
-  const assertionJson = JSON.stringify(assertion, null, 2);
+  const stringifiedAssertion = Object.fromEntries(
+    Object.entries(assertion).map(([key, value]) =>
+      key === "issuedOn"
+        ? [key, value]
+        : [key, value != null ? String(value) : ""]
+    )
+  );
+  const assertionJson = JSON.stringify(stringifiedAssertion, null, 2);
   return (
     <>
       <Head>

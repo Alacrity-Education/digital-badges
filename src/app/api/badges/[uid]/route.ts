@@ -9,8 +9,20 @@ export async function GET(
   const { uid } = await ctx.params;
   const badge = await getBadgeByUUID(uid);
   const issuer = await getIssuer();
-  return Response.json({
+
+  const badgeWithIssuerUrl = {
     ...badge,
     issuer: issuer?.engineUrl + "/api/issuer",
-  });
+  };
+
+  //stringify all fields in badgeWithIssuerUrl
+  const stringifiedBadge = Object.fromEntries(
+    Object.entries(badgeWithIssuerUrl).map(([key, value]) =>
+      key === "issuedOn"
+        ? [key, value]
+        : [key, value != null ? String(value) : ""]
+    )
+  );
+
+  return Response.json(stringifiedBadge);
 }

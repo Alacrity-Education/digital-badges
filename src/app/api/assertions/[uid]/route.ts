@@ -6,5 +6,16 @@ export async function GET(
   ctx: RouteContext<"/api/assertions/[uid]">
 ) {
   const { uid } = await ctx.params;
-  return Response.json(await getAssertionByUUID(uid));
+
+  const assertion = await getAssertionByUUID(uid);
+  //make all fields string. create new assertion
+  const stringifiedAssertion = Object.fromEntries(
+    Object.entries(assertion).map(([key, value]) =>
+      key === "issuedOn"
+        ? [key, value]
+        : [key, value != null ? String(value) : ""]
+    )
+  );
+
+  return Response.json(stringifiedAssertion);
 }
